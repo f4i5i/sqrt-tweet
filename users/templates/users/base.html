@@ -33,7 +33,9 @@
                 <a class="nav-item nav-link" href="{% url 'tweetview' %}">Tweets</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-item nav-link" href="{% url 'todo:mine' %}">My Tasks</a>
                 {% else %}
+                <a class="nav-item nav-link" href="{% url 'todo:lists' %}">Todo Lists</a>
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
@@ -52,7 +54,11 @@
                 </div>
               {% endfor %}
             {% endif %}
-            {% block content %}{% endblock %}
+      
+            {% block content %}
+            {% block extrahead %}{% endblock extrahead %}
+            {% block extra_js %}{% endblock extra_js %}
+            {% endblock %}
           </div>
           <!-- <div class="col-md-4">
             <div class="content-section">
