@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'tweetapi.apps.TweetapiConfig',
+    'fbapi.apps.FbapiConfig',
     'crispy_forms',
     "django_rq",
     'django.contrib.admin',

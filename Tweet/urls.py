@@ -43,7 +43,8 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'),
              name='password_reset_complete'),
     path('', include('users.urls')),
-    path('', include('tweetapi.urls')),             
+    path('', include('tweetapi.urls')),  
+    path('fbapi/', include('fbapi.urls')),           
 
 ] 
 
