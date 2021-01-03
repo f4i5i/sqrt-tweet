@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 import os
+from django.contrib.messages import constants as message_constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,7 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'todo',
+    'rest_framework',
+    'rest_framework_swagger',
+    "django_extensions",
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,10 +66,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Tweet.urls'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SECURITY_WARN_AFTER = 5
+SESSION_SECURITY_EXPIRE_AFTER = 12
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,6 +137,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "Tweet/users", "static")]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -135,7 +147,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK ='bootstrap4'
 
-LOGIN_REDIRECT_URL = 'blog-home'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -179,11 +191,12 @@ SITE_ID = 1
 # Restrict access to ALL todo lists/views to `is_staff` users.
 # If False or unset, all users can see all views (but more granular permissions are still enforced
 # within views, such as requiring staff for adding and deleting lists).
-TODO_STAFF_ONLY = True
+TODO_STAFF_ONLY = False
+TODO_DEFAULT_LIST_ID = None
 
 # If you use the "public" ticket filing option, to whom should these tickets be assigned?
 # Must be a valid username in your system. If unset, unassigned tickets go to "Anyone."
-TODO_DEFAULT_ASSIGNEE = 'f4i5i'
+TODO_DEFAULT_ASSIGNEE = None
 
 # If you use the "public" ticket filing option, to which list should these tickets be saved?
 # Defaults to first list found, which is probably not what you want!
@@ -192,10 +205,17 @@ TODO_DEFAULT_LIST_SLUG = 'tickets'
 # If you use the "public" ticket filing option, to which *named URL* should the user be
 # redirected after submitting? (since they can't see the rest of the ticket system).
 # Defaults to "/"
-TODO_PUBLIC_SUBMIT_REDIRECT = 'dashboard'
+TODO_PUBLIC_SUBMIT_REDIRECT = '/'
 
 # Enable or disable file attachments on Tasks
 # Optionally limit list of allowed filetypes
 TODO_ALLOW_FILE_ATTACHMENTS = True
 TODO_ALLOWED_FILE_ATTACHMENTS = [".jpg", ".gif", ".csv", ".pdf", ".zip"]
 TODO_MAXIMUM_ATTACHMENT_SIZE = 5000000  # In bytes
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}

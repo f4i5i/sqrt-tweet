@@ -5,4 +5,10 @@ from .views import *
 urlpatterns = [
     path('pageinfo',PageView, name="PageView"),
     path('postinfo',PostView, name="PostView"),
+    path('page/',PageCollection.as_view()),
+    path('page/<int:pk>',PageDetail.as_view()),
+    path('posts/',PostsCollection.as_view()),
+    path('posts/<int:pk>',PostsDetail.as_view()),
+    path('comment/',CommentCollection.as_view()),
+    path('comment/<int:pk>',CommentDetail.as_view()),
 ]

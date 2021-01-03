@@ -16,11 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include, re_path
+from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
+from rest_framework.documentation import include_docs_urls
+from rest_framework_swagger.views import get_swagger_view
+
+from users import views as user_views
+from django.views.generic import TemplateView
+
+schema_view = get_swagger_view(title='HODOS API')
 
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path('admin/', admin.site.urls),
     path('todo/', include('todo.urls', namespace="todo")),
     path('register/', user_views.register,name='register'),
@@ -44,8 +53,9 @@ urlpatterns = [
              template_name='users/password_reset_complete.html'),
              name='password_reset_complete'),
     path('', include('users.urls')),
-    path('', include('tweetapi.urls')),  
-    path('fbapi/', include('fbapi.urls')),           
+    path('', include('tweetapi.urls')),
+    path('fbapi/', include('fbapi.urls')),
+    path('swg/',schema_view)
 
 ] 
 
