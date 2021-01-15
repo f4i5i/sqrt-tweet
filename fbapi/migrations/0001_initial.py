@@ -38,18 +38,4 @@ class Migration(migrations.Migration):
                 ('page_fid', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='pagefid', to='fbapi.page')),
             ],
         ),
-        migrations.CreateModel(
-            name='Comments',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('comment_id', models.CharField(max_length=1000, null=True)),
-                ('comment_photo', models.URLField()),
-                ('comment_message', models.TextField()),
-                ('comment_reply', models.TextField()),
-                ('comment_likes_count', models.IntegerField()),
-                ('comment_reaction', models.IntegerField()),
-                ('comment_time', models.TextField()),
-                ('posts_fid', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='postsfid', to='fbapi.posts')),
-            ],
-        ),
     ]

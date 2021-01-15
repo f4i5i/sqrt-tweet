@@ -29,14 +29,38 @@ class Posts(models.Model):
 
 class Comments(models.Model):
     comment_id= models.CharField(max_length=1000,null=True)
+    comment_from = models.CharField(max_length=1000,null=True)
     posts_fid = models.ForeignKey(Posts, related_name="postsfid",on_delete=models.PROTECT)
-    comment_photo = models.URLField()
     comment_message = models.TextField()
-    comment_reply= models.TextField()
     comment_likes_count= models.IntegerField()
-    comment_reaction = models.IntegerField()
     comment_time = models.TextField()
+    can_like = models.BooleanField()
+    can_remove = models.BooleanField()
+    comment_count = models.IntegerField()
+    can_comment = models.BooleanField()
+    is_private = models.BooleanField()
+    is_hidden = models.BooleanField()
+    can_hide = models.BooleanField()
 
     def __str__(self):
-        return self.comment_id
+        return self.comment_message
 
+class Replys(models.Model):
+    reply_id= models.CharField(max_length=1000,null=True)
+    reply_from = models.CharField(max_length=1000,null=True)
+    comment_fid = models.ForeignKey(Comments, related_name="commentsfid",on_delete=models.PROTECT)
+    reply_message = models.TextField()
+    reply_reply= models.TextField()
+    reply_likes_count= models.IntegerField()
+    reply_reaction = models.IntegerField()
+    reply_time = models.TextField()
+    can_like = models.BooleanField()
+    can_remove = models.BooleanField()
+    comment_count = models.IntegerField()
+    can_comment = models.BooleanField()
+    is_private = models.BooleanField()
+    is_hidden = models.BooleanField()
+    can_hide = models.BooleanField()
+
+    def __str__(self):
+        return self.reply_message

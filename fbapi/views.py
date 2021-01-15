@@ -25,6 +25,11 @@ def PostView(request):
     queue.enqueue(post_info)
     return HttpResponse("Posts Data Fetching..........")
 
+def CommentView(request):
+    queue = django_rq.get_queue('default',is_async=True,default_timeout=30000)
+    queue.enqueue(comment_info)
+    return HttpResponse("Comments Data Fetching..........")
+
 
 class PageCollection(APIView):
 
