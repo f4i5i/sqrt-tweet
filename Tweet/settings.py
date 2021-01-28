@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     "django_extensions",
+    'social_django',
 ]
 
 
@@ -87,7 +88,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Tweet.wsgi.application'
+AUTH_USER_MODEL = 'users.CustomUser'
 
+# AUTHENTICATION
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -218,4 +228,39 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
+
+SWAGGER_SETTINGS = {
+    'exclude_url_names': [],
+    'exclude_namespaces': [],
+    'api_version': '0.1',
+    'api_path': '/',
+    'relative_paths': False,
+    'enabled_methods': [
+        'get',
+        'post',
+        'put',
+        'patch',
+        'delete'
+    ],
+    'api_key': '',
+    'is_authenticated': True,
+    'is_superuser': False,
+    'unauthenticated_user': None,
+    'permission_denied_handler': None,
+    'resource_access_handler': None,
+    'SHOW_REQUEST_HEADERS': True,
+    'base_path':'helloreverb.com/docs',
+    'info': {
+        'contact': 'faisalnazir22@gmail.com',
+        'description': 'This is a sample server server. '
+                       'For this sample, you can use the api key '
+                       '"special-key" to test '
+                       'the authorization filters',
+        'license': 'Apache 2.0',
+        'licenseUrl': 'http://www.apache.org/licenses/LICENSE-2.0.html',
+        'termsOfServiceUrl': 'http://helloreverb.com/terms/',
+        'title': 'Swagger Sample App',
+    },
+    'doc_expansion': 'none',
 }

@@ -3,12 +3,12 @@ import json
 from .models import *
 
 
-AToken = "EAACAJ3P5WQUBAGUtKRHOOCwOd2FJveLH3wKhMgz7nQuALwoPQ5Ga4ZCY1rW2IZB7i5ddGuzzdZCZBlB6B0Lpn0yr2JIK31lKxOsVhKPhwXEBtYcANsuxa4ZCT3UOsYBvnq3LrbTfcTtei0vu3eyfV7k7ZCsChapQzSfzYvvApw9YTNUFpVof0gxgVzSrnzX2lxODBCSu5CmwZDZD"
+AToken = "EAACAJ3P5WQUBAJlTb2oDZBmvGhNpnjebfWPdyqpMPk2o69AE97ZAwuuvuJ6CQyCquDwWm3g30fXMAQIE5ZCHmCxDPRSj4h4qXjcYCsfbsmxnUQXblP6VXUwLp7FulPLbvKewxutfq1jHXLN2PAcpDaB7uK6NsFpEpJSbtxyV1lgqsoLGbmit7zUn422sbBfcdsvnpBc2wZDZD"
 def page_info():
     print('Page Functions')
     info = requests.get("https://graph.facebook.com/v9.0/me?fields=username%2Cname%2Cfan_count%2Cabout&access_token="+AToken)
     dataa = info.json()
-    pname = dataa["name"]
+    pname = dataa['name']
     fcount = dataa['fan_count']
     about = dataa['about']
     purl = "https://www.facebook.com/"+dataa['username']

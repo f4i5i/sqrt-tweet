@@ -15,9 +15,9 @@ class Page(models.Model):
 class Posts(models.Model):
     page_fid = models.ForeignKey(Page, related_name="pagefid",on_delete=models.PROTECT)
     post_id= models.CharField(max_length=1000,null=True)
-    post_photo = models.URLField()
+    post_photo = models.URLField(null=True)
     post_message = models.TextField()
-    post_permalink= models.URLField()
+    post_permalink= models.URLField(null=True)
     post_likes_count= models.IntegerField()
     post_shares_count = models.IntegerField()
     post_reaction = models.IntegerField()
@@ -41,6 +41,9 @@ class Comments(models.Model):
     is_private = models.BooleanField()
     is_hidden = models.BooleanField()
     can_hide = models.BooleanField()
+    is_spam = models.BooleanField(default=False, null=True)
+    remaning = models.BooleanField(default=True, null=True)
+    completed = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return self.comment_message
@@ -61,6 +64,10 @@ class Replys(models.Model):
     is_private = models.BooleanField()
     is_hidden = models.BooleanField()
     can_hide = models.BooleanField()
+    is_spam = models.BooleanField(default=False, null=True)
+    remaning = models.BooleanField(default=True, null=True)
+    completed = models.BooleanField(default=False, null=True)
+
 
     def __str__(self):
         return self.reply_message

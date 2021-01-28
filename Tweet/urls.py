@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from users import views as user_views
 from rest_framework.documentation import include_docs_urls
 from rest_framework_swagger.views import get_swagger_view
+from drf_yasg.views import get_schema_view
 
 from users import views as user_views
 from django.views.generic import TemplateView
@@ -33,8 +34,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', include('todo.urls', namespace="todo")),
     path('register/', user_views.register,name='register'),
+    path('activate/<uidb64>/<token>',user_views.VerificationView.as_view(), name='activate'),
     path('profile/', user_views.profile,name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
+    path('social-auth/', include('social_django.urls', namespace="social")),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
     path('password-reset/', 
             auth_views.PasswordResetView.as_view(
