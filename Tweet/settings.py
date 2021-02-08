@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     "django_extensions",
     'social_django',
+    'django_filters',
+    'django_crontab',
 ]
 
 
@@ -93,9 +95,6 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # AUTHENTICATION
 
 AUTHENTICATION_BACKENDS = [
-    'social_core.backends.linkedin.LinkedinOAuth2',
-    'social_core.backends.instagram.InstagramOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -228,6 +227,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+
 }
 
 SWAGGER_SETTINGS = {
@@ -264,3 +265,8 @@ SWAGGER_SETTINGS = {
     },
     'doc_expansion': 'none',
 }
+
+
+CRONJOBS = [
+    ('*/5 * * * *', 'myapp.cron.my_scheduled_job')
+]

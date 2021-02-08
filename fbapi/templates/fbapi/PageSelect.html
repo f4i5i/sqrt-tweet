@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <table>
+            <tr>
+                <th>Page Name</th>
+                <th>Page Likes</th>
+            </tr>
+            {%for page in data%}
+            <tr>
+                <td>{{page.name}}</td>
+                <td>{{page.id}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

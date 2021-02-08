@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="col col-lg-12">
+			<form method="get">
+				{{myFilter.form}}<br>
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+	</div>
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Post Id</th>
+					<th>Message</th>
+					<th>Source</th>
+					<th>Time</th>
+				</tr>
+				{% for comment in comments %}
+					<tr>
+						<td>{{comment.posts_fid}}</td>
+						<td>{{comment.comment_message}}</td>
+						<td>{{comment.source}}</td>
+						<td>{{comment.comment_time}}</td>
+					</tr>
+				{% endfor%}
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Page)
 admin.site.register(Posts)
 admin.site.register(Comments)
+admin.site.register(FbProfile)

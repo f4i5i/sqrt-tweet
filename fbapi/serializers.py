@@ -9,7 +9,7 @@ class PageSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posts
-        fields = "__all__"
+        fields = ['post_id']
 
 
 class CommentSerializer(serializers.ModelSerializer):
